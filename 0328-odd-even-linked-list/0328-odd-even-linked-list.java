@@ -15,25 +15,19 @@ class Solution {
             return head;
         }
     
-        ListNode temp = head;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
 
-        while(temp != null && temp.next != null){
-            list.add(temp.val);
-            temp = temp.next.next;
-        }
-        if(temp != null) list.add(temp.val);
-        
-        temp = head.next;
+        while(even != null && even.next != null){
+            odd.next = odd.next.next; //moving odd and even
+            even.next = even.next.next;
 
-        while(temp != null && temp.next != null){
-            list.add(temp.val);
-            temp = temp.next.next;
+            odd = odd.next; 
+            even = even.next;
         }
-        temp = head;
-        for(int k : list){
-           temp.val = k;
-           temp = temp.next;
-        }
+        odd.next = evenHead; // connecting odd and even
+
         return head;
     }
 }
